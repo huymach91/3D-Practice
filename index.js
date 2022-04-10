@@ -24,9 +24,14 @@ const textureDoor = textureLoader.load(
 // objects
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 10, 10);
-const material = new THREE.MeshBasicMaterial({
+// const material = new THREE.MeshBasicMaterial({
+//   color: 0x00ff00,
+//   map: textureDoor,
+// });
+const material = new THREE.MeshNormalMaterial({
   color: 0x00ff00,
   map: textureDoor,
+  flatShading: true,
 });
 const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
