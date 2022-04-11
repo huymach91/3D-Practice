@@ -14,7 +14,6 @@ const sizes = {
 const scene = new THREE.Scene();
 // axis helper
 const axisHelper = new THREE.AxesHelper();
-scene.add(axisHelper);
 // texture
 const textureLoader = new THREE.TextureLoader();
 const textureDoor = textureLoader.load(
@@ -28,10 +27,10 @@ const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 10, 10);
 //   color: 0x00ff00,
 //   map: textureDoor,
 // });
-const material = new THREE.MeshNormalMaterial({
-  color: 0x00ff00,
-  map: textureDoor,
-  flatShading: true,
+const material = new THREE.MeshLambertMaterial({
+  // color: 0x00ff00,
+  // map: textureDoor,
+  // flatShading: true,
 });
 const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
@@ -39,6 +38,10 @@ const sphere = new THREE.Mesh(sphereGeometry, material);
 sphere.position.x = 1.5;
 
 scene.add(cube, sphere);
+
+// lights
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambientLight);
 
 // tween
 
