@@ -80,6 +80,9 @@ const stick = () => {
   sphere.rotation.y = 0.5 * elapsedTime;
   cube.rotation.y = 0.5 * elapsedTime;
 
+  // sphere.position.x = Math.sin(elapsedTime / 2) * 2;
+  // sphere.position.y = Math.cos(elapsedTime / 2) * 2;
+
   renderer.render(scene, camera);
   window.requestAnimationFrame(stick);
 };
