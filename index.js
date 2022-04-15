@@ -27,11 +27,13 @@ const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 10, 10);
 //   color: 0x00ff00,
 //   map: textureDoor,
 // });
-const material = new THREE.MeshLambertMaterial({
-  // color: 0x00ff00,
-  // map: textureDoor,
-  // flatShading: true,
-});
+const material = new THREE.MeshMatcapMaterial();
+
+// const material = new THREE.MeshLambertMaterial({
+//   // color: 0x00ff00,
+//   // map: textureDoor,
+//   // flatShading: true,
+// });
 material.side = THREE.FrontSide;
 material.transparent = true;
 material.opacity = 0.5;
