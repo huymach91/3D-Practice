@@ -14,6 +14,7 @@ const sizes = {
 const scene = new THREE.Scene();
 // axis helper
 const axisHelper = new THREE.AxesHelper();
+scene.add(axisHelper);
 // texture
 const textureLoader = new THREE.TextureLoader();
 const textureDoor = textureLoader.load(
@@ -29,8 +30,12 @@ const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 10, 10);
 //   color: 0x00ff00,
 //   map: textureDoor,
 // });
-const material = new THREE.MeshLambertMaterial();
+const material = new THREE.MeshToonMaterial();
 material.matcap = textureMatcap;
+material.shininess = 100;
+material.specular = new THREE.Color(0x1188ff);
+material.color = new THREE.Color(0xffffff);
+
 // const material = new THREE.MeshLambertMaterial({
 //   // color: 0x00ff00,
 //   // map: textureDoor,
@@ -40,14 +45,20 @@ material.matcap = textureMatcap;
 const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
 const sphere = new THREE.Mesh(sphereGeometry, material);
-sphere.position.x = 1.5;
+sphere.position.x = 2.5;
 
 scene.add(cube, sphere);
 
 // lights
-const pointLight = new THREE.PointLight(0xffffff, 2)
-pointLight.position.x = 0.6
-scene.add(pointLight)
+const pointLight = new THREE.PointLight(0xffffff, 2);
+pointLight.position.x = 1;
+pointLight.position.z = 1.5;
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+ambientLight.position.x = 1;
+
+scene.add(ambientLight);
+scene.add(pointLight);
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
@@ -64,7 +75,7 @@ const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
 });
 renderer.setSize(sizes.width, sizes.height);
-renderer.setClearColor( 0xffffff, 1 );
+// renderer.setClearColor(0xffffff, 1);
 renderer.render(scene, camera);
 
 const controls = new OrbitControls(camera, canvas);
