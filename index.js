@@ -24,25 +24,30 @@ const textureMatcap = textureLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/matcaps/1.png'
 );
 const gradientTexture = textureLoader.load(
-  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/gradients/3.jpg'
+  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/gradients/5.jpg'
 );
 
 // objects
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 10, 10);
-const torusGeometry = new THREE.TorusGeometry(5, 10, 10, 100);
+const torusGeometry = new THREE.TorusBufferGeometry(0.3, 0.2, 16, 32);
 // const material = new THREE.MeshBasicMaterial({
 //   color: 0x00ff00,
 //   map: textureDoor,
 // });
+gradientTexture.minFilter = THREE.NearestFilter;
+gradientTexture.magFilter = THREE.NearestFilter;
+gradientTexture.generateMipmaps = false;
+
 const material = new THREE.MeshToonMaterial();
-material.matcap = textureMatcap;
-material.shininess = 100;
-material.specular = new THREE.Color(0x1188ff);
-material.color = new THREE.Color(0xffff00);
-gradientTexture.minFilter = THREE.NearestFilter
-gradientTexture.magFilter = THREE.NearestFilter
-gradientTexture.generateMipmaps = false
+material.gradientMap = gradientTexture;
+
+const basicMaterial = new THREE.MeshBasicMaterial();
+// material.matcap = textureMatcap;
+// material.shininess = 100;
+// material.specular = new THREE.Color(0x1188ff);
+material.color = new THREE.Color(0xffffff);
+
 // const material = new THREE.MeshLambertMaterial({
 //   // color: 0x00ff00,
 //   // map: textureDoor,
@@ -53,11 +58,11 @@ const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
 const sphere = new THREE.Mesh(sphereGeometry, material);
 sphere.position.x = 2.5;
-const torus = new THREE.Mesh(torusGeometry, material);
-torus.position.x = -1;
+const torus = new THREE.Mesh(torusGeometry, basicMaterial);
+torus.position.x = 1.2;
 
-scene.add(cube, sphere);
 scene.add(torus);
+scene.add(cube, sphere);
 
 // lights
 const pointLight = new THREE.PointLight(0xffffff, 2);
@@ -68,7 +73,7 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 2);
 ambientLight.position.x = 1;
 
 scene.add(ambientLight);
-scene.add(pointLight);
+// scene.add(pointLight);
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
@@ -85,7 +90,7 @@ const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
 });
 renderer.setSize(sizes.width, sizes.height);
-// renderer.setClearColor(0xffffff, 1);
+renderer.setClearColor(0x000000, 1);
 renderer.render(scene, camera);
 
 const controls = new OrbitControls(camera, canvas);
