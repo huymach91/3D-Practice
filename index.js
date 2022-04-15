@@ -19,7 +19,9 @@ const textureLoader = new THREE.TextureLoader();
 const textureDoor = textureLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/color.jpg'
 );
-
+const textureMatcap = textureLoader.load(
+  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/matcaps/1.png'
+);
 // objects
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 10, 10);
@@ -27,16 +29,13 @@ const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 10, 10);
 //   color: 0x00ff00,
 //   map: textureDoor,
 // });
-const material = new THREE.MeshMatcapMaterial();
-
+const material = new THREE.MeshLambertMaterial();
+material.matcap = textureMatcap;
 // const material = new THREE.MeshLambertMaterial({
 //   // color: 0x00ff00,
 //   // map: textureDoor,
 //   // flatShading: true,
 // });
-material.side = THREE.FrontSide;
-material.transparent = true;
-material.opacity = 0.5;
 
 const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
@@ -46,10 +45,9 @@ sphere.position.x = 1.5;
 scene.add(cube, sphere);
 
 // lights
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-scene.add(ambientLight);
-
-// tween
+const pointLight = new THREE.PointLight(0xffffff, 2)
+pointLight.position.x = 0.6
+scene.add(pointLight)
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
@@ -66,6 +64,7 @@ const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
 });
 renderer.setSize(sizes.width, sizes.height);
+renderer.setClearColor( 0xffffff, 1 );
 renderer.render(scene, camera);
 
 const controls = new OrbitControls(camera, canvas);
