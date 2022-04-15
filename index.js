@@ -32,6 +32,10 @@ const material = new THREE.MeshLambertMaterial({
   // map: textureDoor,
   // flatShading: true,
 });
+material.side = THREE.FrontSide;
+material.transparent = true;
+material.opacity = 0.5;
+
 const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
 const sphere = new THREE.Mesh(sphereGeometry, material);
