@@ -23,9 +23,14 @@ const textureDoor = textureLoader.load(
 const textureMatcap = textureLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/matcaps/1.png'
 );
+const gradientTexture = textureLoader.load(
+  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/gradients/3.jpg'
+);
+
 // objects
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 10, 10);
+const torusGeometry = new THREE.TorusGeometry(5, 10, 10, 100);
 // const material = new THREE.MeshBasicMaterial({
 //   color: 0x00ff00,
 //   map: textureDoor,
@@ -34,8 +39,10 @@ const material = new THREE.MeshToonMaterial();
 material.matcap = textureMatcap;
 material.shininess = 100;
 material.specular = new THREE.Color(0x1188ff);
-material.color = new THREE.Color(0xffffff);
-
+material.color = new THREE.Color(0xffff00);
+gradientTexture.minFilter = THREE.NearestFilter
+gradientTexture.magFilter = THREE.NearestFilter
+gradientTexture.generateMipmaps = false
 // const material = new THREE.MeshLambertMaterial({
 //   // color: 0x00ff00,
 //   // map: textureDoor,
@@ -46,8 +53,11 @@ const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
 const sphere = new THREE.Mesh(sphereGeometry, material);
 sphere.position.x = 2.5;
+const torus = new THREE.Mesh(torusGeometry, material);
+torus.position.x = -1;
 
 scene.add(cube, sphere);
+scene.add(torus);
 
 // lights
 const pointLight = new THREE.PointLight(0xffffff, 2);
