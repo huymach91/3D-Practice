@@ -110,6 +110,7 @@ const stick = () => {
   const elapsedTime = clock.getElapsedTime();
   sphere.rotation.y = 0.5 * elapsedTime;
   cube.rotation.y = 0.5 * elapsedTime;
+  torus.rotation.y = 0.5 * elapsedTime;
 
   // sphere.position.x = Math.sin(elapsedTime / 2) * 2;
   // sphere.position.y = Math.cos(elapsedTime / 2) * 2;
