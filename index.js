@@ -39,15 +39,16 @@ gradientTexture.minFilter = THREE.NearestFilter;
 gradientTexture.magFilter = THREE.NearestFilter;
 gradientTexture.generateMipmaps = false;
 
-const material = new THREE.MeshToonMaterial();
+const material = new THREE.MeshStandardMaterial();
 material.gradientMap = gradientTexture;
 
 const basicMaterial = new THREE.MeshBasicMaterial();
 // material.matcap = textureMatcap;
 // material.shininess = 100;
 // material.specular = new THREE.Color(0x1188ff);
-material.color = new THREE.Color(0xffffff);
-
+// material.color = new THREE.Color(0xffffff);
+material.metalness = 0.85;
+// material.roughness = 0.65;
 // const material = new THREE.MeshLambertMaterial({
 //   // color: 0x00ff00,
 //   // map: textureDoor,
@@ -73,7 +74,7 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 2);
 ambientLight.position.x = 1;
 
 scene.add(ambientLight);
-// scene.add(pointLight);
+scene.add(pointLight);
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
