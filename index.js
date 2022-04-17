@@ -67,6 +67,12 @@ const sphere = new THREE.Mesh(sphereGeometry, material);
 sphere.position.x = 2.5;
 const torus = new THREE.Mesh(torusGeometry, basicMaterial);
 torus.position.x = 1.2;
+torus.geometry.setAttribute(
+  'uv2',
+  new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
+);
+material.aoMap = doorAmbientOcclusionTexture;
+material.aoMapIntensity = 1;
 
 scene.add(torus);
 scene.add(cube, sphere);
