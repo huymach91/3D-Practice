@@ -29,6 +29,9 @@ const textureMatcap = textureLoader.load(
 const gradientTexture = textureLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/gradients/5.jpg'
 );
+const doorAmbientOcclusionTexture = textureLoader.load(
+  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/door/ambientOcclusion.jpg'
+);
 
 // objects
 const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -58,9 +61,6 @@ material.metalness = 0.85;
 //   // flatShading: true,
 // });
 
-gui.add(material, 'metalness').min(0).max(1).step(0.0001);
-gui.add(material, 'roughness').min(0).max(1).step(0.0001);
-
 const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
 const sphere = new THREE.Mesh(sphereGeometry, material);
@@ -71,6 +71,7 @@ torus.geometry.setAttribute(
   'uv2',
   new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
 );
+material.map = doorAmbientOcclusionTexture;
 material.aoMap = doorAmbientOcclusionTexture;
 material.aoMapIntensity = 1;
 
@@ -133,3 +134,7 @@ const stick = () => {
 };
 
 stick();
+
+gui.add(material, 'metalness').min(0).max(1).step(0.0001);
+gui.add(material, 'roughness').min(0).max(1).step(0.0001);
+gui.add(material, 'aoMapIntensity').min(0).max(1).step(0.1);
