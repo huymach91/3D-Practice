@@ -4,10 +4,13 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import gsap from 'gsap';
+import * as dat from 'lil-gui';
+
+const gui = new dat.GUI();
 
 const sizes = {
-  width: 800,
-  height: 600,
+  width: 1500,
+  height: 800,
 };
 
 // scene
@@ -54,6 +57,9 @@ material.metalness = 0.85;
 //   // map: textureDoor,
 //   // flatShading: true,
 // });
+
+gui.add(material, 'metalness').min(0).max(1).step(0.0001);
+gui.add(material, 'roughness').min(0).max(1).step(0.0001);
 
 const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
