@@ -11,10 +11,6 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 const gui = new dat.GUI();
 const fontLoader = new FontLoader();
 
-fontLoader.load('./fonts/fonts/helvetiker_regular.typeface.json', (font) => {
-  console.log('loaded');
-});
-
 const sizes = {
   width: 1500,
   height: 800,
@@ -77,27 +73,37 @@ torus.geometry.setAttribute(
   'uv2',
   new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
 );
-const text = new THREE.Mesh(
-  new THREE.TextGeometry('Hello ThreeJs', {
-    size: 0.5,
-    height: 0.2,
-    curveSegments: 12,
-    bevelEnabled: true,
-    bevelThickness: 0.03,
-    bevelSize: 0.02,
-    bevelOffset: 0,
-    bevelSegments: 5,
-  }),
-  basicMaterial
+
+fontLoader.load(
+  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/fonts/helvetiker_regular.typeface.json',
+  (font) => {
+    console.log('loaded');
+    const text = new THREE.Mesh(
+      new TextGeometry('Hello ThreeJs', {
+        font: font,
+        size: 0.5,
+        height: 0.2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 0.03,
+        bevelSize: 0.02,
+        bevelOffset: 0,
+        bevelSegments: 5,
+      }),
+      material
+    );
+    text.position.x = -1.5;
+
+    scene.add(text);
+  }
 );
-text.position.x = -1.5;
 
 material.map = doorAmbientOcclusionTexture;
 material.aoMap = doorAmbientOcclusionTexture;
 material.aoMapIntensity = 1;
 
 scene.add(torus);
-scene.add(cube, sphere, text);
+scene.add(cube, sphere);
 
 // lights
 const pointLight = new THREE.PointLight(0xffffff, 2);
