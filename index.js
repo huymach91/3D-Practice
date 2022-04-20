@@ -7,8 +7,17 @@ import gsap from 'gsap';
 import * as dat from 'lil-gui';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import typefaceFont from 'three/examples/fonts/helvetiker_regular.typeface.json';
 
 const gui = new dat.GUI();
+const fontLoader = new FontLoader();
+
+fontLoader.load(
+  'three/examples/fonts/fonts/helvetiker_regular.typeface.json',
+  (font) => {
+    console.log('loaded');
+  }
+);
 
 const sizes = {
   width: 1500,
@@ -47,7 +56,7 @@ gradientTexture.generateMipmaps = false;
 const material = new THREE.MeshStandardMaterial();
 material.gradientMap = gradientTexture;
 
-const basicMaterial = new THREE.MeshBasicMaterial();
+const basicMaterial = new THREE.MeshBasicMaterial({ wireframe: true });
 // material.matcap = textureMatcap;
 // material.shininess = 100;
 // material.specular = new THREE.Color(0x1188ff);
@@ -73,7 +82,16 @@ torus.geometry.setAttribute(
   new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
 );
 const text = new THREE.Mesh(
-  new THREE.TextGeometry('Hello ThreeJs', { size: 0.5 }),
+  new THREE.TextGeometry('Hello ThreeJs', {
+    size: 0.5,
+    height: 0.2,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 0.03,
+    bevelSize: 0.02,
+    bevelOffset: 0,
+    bevelSegments: 5,
+  }),
   basicMaterial
 );
 text.position.x = -1.5;
