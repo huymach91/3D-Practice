@@ -5,6 +5,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import gsap from 'gsap';
 import * as dat from 'lil-gui';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 const gui = new dat.GUI();
 
@@ -58,6 +60,8 @@ material.metalness = 0.85;
 //   // flatShading: true,
 // });
 
+// 3D text
+
 const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
 const sphere = new THREE.Mesh(sphereGeometry, material);
@@ -68,12 +72,18 @@ torus.geometry.setAttribute(
   'uv2',
   new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
 );
+const text = new THREE.Mesh(
+  new THREE.TextGeometry('Hello ThreeJs', { size: 0.5 }),
+  basicMaterial
+);
+text.position.x = -1.5;
+
 material.map = doorAmbientOcclusionTexture;
 material.aoMap = doorAmbientOcclusionTexture;
 material.aoMapIntensity = 1;
 
 scene.add(torus);
-scene.add(cube, sphere);
+scene.add(cube, sphere, text);
 
 // lights
 const pointLight = new THREE.PointLight(0xffffff, 2);
