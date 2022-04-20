@@ -37,10 +37,7 @@ const doorAmbientOcclusionTexture = textureLoader.load(
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 10, 10);
 const torusGeometry = new THREE.TorusBufferGeometry(0.3, 0.2, 16, 32);
-// const material = new THREE.MeshBasicMaterial({
-//   color: 0x00ff00,
-//   map: textureDoor,
-// });
+
 gradientTexture.minFilter = THREE.NearestFilter;
 gradientTexture.magFilter = THREE.NearestFilter;
 gradientTexture.generateMipmaps = false;
