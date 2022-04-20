@@ -77,7 +77,6 @@ torus.geometry.setAttribute(
 fontLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/fonts/helvetiker_regular.typeface.json',
   (font) => {
-    console.log('loaded');
     const text = new THREE.Mesh(
       new TextGeometry('Hello ThreeJs', {
         font: font,
@@ -92,7 +91,8 @@ fontLoader.load(
       }),
       material
     );
-    text.position.x = -1.5;
+    text.position.x = 0;
+    text.position.y = 1;
 
     scene.add(text);
   }
