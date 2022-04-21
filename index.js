@@ -48,7 +48,7 @@ gradientTexture.generateMipmaps = false;
 const material = new THREE.MeshStandardMaterial();
 material.gradientMap = gradientTexture;
 
-const basicMaterial = new THREE.MeshBasicMaterial({ wireframe: true });
+const basicMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 // material.matcap = textureMatcap;
 // material.shininess = 100;
 // material.specular = new THREE.Color(0x1188ff);
@@ -73,6 +73,12 @@ torus.geometry.setAttribute(
   'uv2',
   new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
 );
+const plane = new THREE.Mesh(new THREE.PlaneGeometry(), basicMaterial);
+plane.position.y = -0.6;
+plane.rotation.x = -Math.PI / 2;
+plane.scale.x = 6.5;
+plane.scale.z = 6;
+plane.scale.y = 3;
 
 fontLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/fonts/helvetiker_regular.typeface.json',
@@ -89,7 +95,7 @@ fontLoader.load(
         bevelOffset: 0,
         bevelSegments: 5,
       }),
-      material
+      basicMaterial
     );
     text.position.x = 0;
     text.position.y = 1;
@@ -103,7 +109,7 @@ material.aoMap = doorAmbientOcclusionTexture;
 material.aoMapIntensity = 1;
 
 scene.add(torus);
-scene.add(cube, sphere);
+scene.add(cube, sphere, plane);
 
 // lights
 const pointLight = new THREE.PointLight(0xffffff, 2);
