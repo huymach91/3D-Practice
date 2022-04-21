@@ -67,6 +67,8 @@ const cube = new THREE.Mesh(geometry, material);
 cube.scale.x = 0.5;
 const sphere = new THREE.Mesh(sphereGeometry, material);
 sphere.position.x = 2.5;
+sphere.castShadow = true;
+
 const torus = new THREE.Mesh(torusGeometry, basicMaterial);
 torus.position.x = 1.2;
 torus.geometry.setAttribute(
@@ -74,7 +76,7 @@ torus.geometry.setAttribute(
   new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
 );
 const plane = new THREE.Mesh(new THREE.PlaneGeometry(), basicMaterial);
-plane.position.y = -0.6;
+plane.position.y = -0.5;
 plane.rotation.x = -Math.PI / 2;
 plane.scale.x = 6.5;
 plane.scale.z = 6;
@@ -115,12 +117,33 @@ scene.add(cube, sphere, plane);
 const pointLight = new THREE.PointLight(0xffffff, 2);
 pointLight.position.x = 1;
 pointLight.position.z = 1.5;
+pointLight.castShadow = true;
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 2);
 ambientLight.position.x = 1;
 
+const directionalLight = new THREE.DirectionalLight(0x00ffff, 15);
+directionalLight.position.x = 1;
+
+directionalLight.shadow.mapSize.width = 1024;
+directionalLight.shadow.mapSize.height = 1024;
+
+directionalLight.shadow.camera.near = 1;
+directionalLight.shadow.camera.far = 6;
+
+directionalLight.shadow.camera.top = 2;
+directionalLight.shadow.camera.right = 2;
+directionalLight.shadow.camera.bottom = -2;
+directionalLight.shadow.camera.left = -2;
+
+directionalLight.castShadow = true;
+
 scene.add(ambientLight);
 scene.add(pointLight);
+scene.add(directionalLight);
+
+sphere.castShadow = true;
+plane.receiveShadow = true;
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
@@ -153,11 +176,11 @@ window.addEventListener('dblclick', () => {
 const clock = new THREE.Clock();
 
 const stick = () => {
-  // camera.lookAt(cube.position);
-  const elapsedTime = clock.getElapsedTime();
-  sphere.rotation.y = 0.5 * elapsedTime;
-  cube.rotation.y = 0.5 * elapsedTime;
-  torus.rotation.y = 0.5 * elapsedTime;
+  // // camera.lookAt(cube.position);
+  // const elapsedTime = clock.getElapsedTime();
+  // sphere.rotation.y = 0.5 * elapsedTime;
+  // cube.rotation.y = 0.5 * elapsedTime;
+  // torus.rotation.y = 0.5 * elapsedTime;
 
   // sphere.position.x = Math.sin(elapsedTime / 2) * 2;
   // sphere.position.y = Math.cos(elapsedTime / 2) * 2;
