@@ -12,8 +12,8 @@ const gui = new dat.GUI();
 const fontLoader = new FontLoader();
 
 const sizes = {
-  width: 1500,
-  height: 800,
+  width: window.innerWidth,
+  height: window.innerHeight,
 };
 
 // scene
@@ -35,6 +35,7 @@ const gradientTexture = textureLoader.load(
 const doorAmbientOcclusionTexture = textureLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/door/ambientOcclusion.jpg'
 );
+const simpleShadow = textureLoader.load('/textures/simpleShadow.jpg')
 
 // objects
 const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -47,6 +48,7 @@ gradientTexture.generateMipmaps = false;
 
 const material = new THREE.MeshStandardMaterial();
 material.gradientMap = gradientTexture;
+material.roughness = 0.7;
 
 const basicMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 // material.matcap = textureMatcap;
@@ -81,6 +83,7 @@ plane.rotation.x = -Math.PI / 2;
 plane.scale.x = 6.5;
 plane.scale.z = 6;
 plane.scale.y = 3;
+plane.receiveShadow = true;
 
 fontLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/fonts/helvetiker_regular.typeface.json',
@@ -119,6 +122,18 @@ pointLight.position.x = 1;
 pointLight.position.z = 1.5;
 pointLight.castShadow = true;
 
+const spotLight = new THREE.SpotLight(0xffffff, 0.3);
+spotLight.castShadow = true;
+spotLight.shadow.mapSize.width = 1024;
+spotLight.shadow.mapSize.height = 1024;
+
+spotLight.shadow.camera.near = 1;
+spotLight.shadow.camera.far = 6;
+
+spotLight.shadow.camera.fov = 30;
+
+spotLight.position.set(0, 2, 2);
+
 const ambientLight = new THREE.AmbientLight(0xffffff, 2);
 ambientLight.position.x = 1;
 
@@ -138,12 +153,10 @@ directionalLight.shadow.camera.left = -2;
 
 directionalLight.castShadow = true;
 
+scene.add(spotLight);
 scene.add(ambientLight);
 scene.add(pointLight);
 scene.add(directionalLight);
-
-sphere.castShadow = true;
-plane.receiveShadow = true;
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
@@ -161,6 +174,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setClearColor(0x000000, 1);
+renderer.shadowMap.enabled = true;
 renderer.render(scene, camera);
 
 const controls = new OrbitControls(camera, canvas);
