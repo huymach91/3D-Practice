@@ -3,13 +3,9 @@
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import gsap from 'gsap';
 import * as dat from 'lil-gui';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 const gui = new dat.GUI();
-const fontLoader = new FontLoader();
 
 const sizes = {
   width: window.innerWidth,
@@ -20,125 +16,32 @@ const sizes = {
 const scene = new THREE.Scene();
 // axis helper
 const axisHelper = new THREE.AxesHelper();
-scene.add(axisHelper);
 // texture
 const textureLoader = new THREE.TextureLoader();
-const textureDoor = textureLoader.load(
-  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/color.jpg'
+const simpleShadow = textureLoader.load(
+  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/simpleShadow.jpg'
 );
-const textureMatcap = textureLoader.load(
-  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/matcaps/1.png'
-);
-const gradientTexture = textureLoader.load(
-  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/gradients/5.jpg'
-);
-const doorAmbientOcclusionTexture = textureLoader.load(
-  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/door/ambientOcclusion.jpg'
-);
-const simpleShadow = textureLoader.load('/textures/simpleShadow.jpg')
 
 // objects
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 10, 10);
-const torusGeometry = new THREE.TorusBufferGeometry(0.3, 0.2, 16, 32);
-
-gradientTexture.minFilter = THREE.NearestFilter;
-gradientTexture.magFilter = THREE.NearestFilter;
-gradientTexture.generateMipmaps = false;
-
 const material = new THREE.MeshStandardMaterial();
-material.gradientMap = gradientTexture;
 material.roughness = 0.7;
 
-const basicMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-// material.matcap = textureMatcap;
-// material.shininess = 100;
-// material.specular = new THREE.Color(0x1188ff);
-// material.color = new THREE.Color(0xffffff);
-material.metalness = 0.85;
-// material.roughness = 0.65;
-// const material = new THREE.MeshLambertMaterial({
-//   // color: 0x00ff00,
-//   // map: textureDoor,
-//   // flatShading: true,
-// });
+const sphere = new THREE.Mesh(new THREE.SphereGeometry(1), material);
+sphere.position.y = 0.5;
 
-// 3D text
-
-const cube = new THREE.Mesh(geometry, material);
-cube.scale.x = 0.5;
-const sphere = new THREE.Mesh(sphereGeometry, material);
-sphere.position.x = 2.5;
-sphere.castShadow = true;
-
-const torus = new THREE.Mesh(torusGeometry, basicMaterial);
-torus.position.x = 1.2;
-torus.geometry.setAttribute(
-  'uv2',
-  new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
-);
-const plane = new THREE.Mesh(new THREE.PlaneGeometry(), basicMaterial);
+const plane = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), material);
+plane.rotation.x = -Math.PI * 0.5;
 plane.position.y = -0.5;
-plane.rotation.x = -Math.PI / 2;
-plane.scale.x = 6.5;
-plane.scale.z = 6;
-plane.scale.y = 3;
-plane.receiveShadow = true;
 
-fontLoader.load(
-  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/fonts/helvetiker_regular.typeface.json',
-  (font) => {
-    const text = new THREE.Mesh(
-      new TextGeometry('Hello ThreeJs', {
-        font: font,
-        size: 0.5,
-        height: 0.2,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 0.03,
-        bevelSize: 0.02,
-        bevelOffset: 0,
-        bevelSegments: 5,
-      }),
-      basicMaterial
-    );
-    text.position.x = 0;
-    text.position.y = 1;
-
-    scene.add(text);
-  }
-);
-
-material.map = doorAmbientOcclusionTexture;
-material.aoMap = doorAmbientOcclusionTexture;
-material.aoMapIntensity = 1;
-
-scene.add(torus);
-scene.add(cube, sphere, plane);
+scene.add(sphere, plane);
 
 // lights
-const pointLight = new THREE.PointLight(0xffffff, 2);
-pointLight.position.x = 1;
-pointLight.position.z = 1.5;
-pointLight.castShadow = true;
 
-const spotLight = new THREE.SpotLight(0xffffff, 0.3);
-spotLight.castShadow = true;
-spotLight.shadow.mapSize.width = 1024;
-spotLight.shadow.mapSize.height = 1024;
-
-spotLight.shadow.camera.near = 1;
-spotLight.shadow.camera.far = 6;
-
-spotLight.shadow.camera.fov = 30;
-
-spotLight.position.set(0, 2, 2);
-
-const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 ambientLight.position.x = 1;
 
-const directionalLight = new THREE.DirectionalLight(0x00ffff, 15);
-directionalLight.position.x = 1;
+const directionalLight = new THREE.DirectionalLight(0x00ffff, 0.8);
+directionalLight.position.set(2, 2, -1);
 
 directionalLight.shadow.mapSize.width = 1024;
 directionalLight.shadow.mapSize.height = 1024;
@@ -153,9 +56,8 @@ directionalLight.shadow.camera.left = -2;
 
 directionalLight.castShadow = true;
 
-scene.add(spotLight);
+// scene.add(spotLight);
 scene.add(ambientLight);
-scene.add(pointLight);
 scene.add(directionalLight);
 
 // camera
@@ -190,15 +92,6 @@ window.addEventListener('dblclick', () => {
 const clock = new THREE.Clock();
 
 const stick = () => {
-  // // camera.lookAt(cube.position);
-  // const elapsedTime = clock.getElapsedTime();
-  // sphere.rotation.y = 0.5 * elapsedTime;
-  // cube.rotation.y = 0.5 * elapsedTime;
-  // torus.rotation.y = 0.5 * elapsedTime;
-
-  // sphere.position.x = Math.sin(elapsedTime / 2) * 2;
-  // sphere.position.y = Math.cos(elapsedTime / 2) * 2;
-
   renderer.render(scene, camera);
   window.requestAnimationFrame(stick);
 };
