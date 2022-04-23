@@ -44,11 +44,12 @@ scene.add(sphere, plane, torus);
 
 // lights
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 ambientLight.position.x = 1;
 
-const directionalLight = new THREE.DirectionalLight(0x00ffff, 1);
-directionalLight.position.set(1, 2, -1);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.y = 5;
+directionalLight.position.x = 5;
 
 directionalLight.castShadow = true;
 
@@ -63,6 +64,7 @@ camera.position.x = 1;
 camera.position.z = 10;
 
 scene.add(camera);
+scene.add(new THREE.CameraHelper(directionalLight.shadow.camera));
 
 // canvas
 const canvas = document.getElementById('canvas');
