@@ -50,8 +50,15 @@ ambientLight.position.x = 1;
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.y = 5;
 directionalLight.position.x = 5;
-
+directionalLight.position.z = 5;
+directionalLight.shadow.mapSize.width = 50;
+directionalLight.shadow.mapSize.height = 50;
 directionalLight.castShadow = true;
+
+directionalLight.shadow.camera.near = 1;
+directionalLight.shadow.camera.far = 8;
+
+gui.add(directionalLight.shadow.camera, 'near').min(0).max(10).step(1);
 
 // scene.add(spotLight);
 scene.add(ambientLight);
