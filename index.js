@@ -48,15 +48,16 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 ambientLight.position.x = 1;
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.y = 5;
-directionalLight.position.x = 5;
+directionalLight.position.y = 4;
+directionalLight.position.x = 10;
 directionalLight.position.z = 5;
-directionalLight.shadow.mapSize.width = 50;
-directionalLight.shadow.mapSize.height = 50;
+
 directionalLight.castShadow = true;
 
-directionalLight.shadow.camera.near = 1;
-directionalLight.shadow.camera.far = 8;
+directionalLight.shadow.camera.near = 5;
+directionalLight.shadow.camera.far = 20;
+directionalLight.shadow.mapSize.width = 500;
+directionalLight.shadow.mapSize.height = 500;
 
 gui.add(directionalLight.shadow.camera, 'near').min(0).max(10).step(1);
 
@@ -68,7 +69,7 @@ scene.add(directionalLight);
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
 camera.position.y = 5;
 camera.position.x = 1;
-camera.position.z = 10;
+camera.position.z = 20;
 
 scene.add(camera);
 scene.add(new THREE.CameraHelper(directionalLight.shadow.camera));
@@ -80,7 +81,10 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setClearColor(0x000000, 1);
+
 renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 renderer.render(scene, camera);
 
 const controls = new OrbitControls(camera, canvas);
