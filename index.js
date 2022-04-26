@@ -100,6 +100,8 @@ window.addEventListener('dblclick', () => {
 const clock = new THREE.Clock();
 
 const stick = () => {
+  directionalLight.position.x = Math.sin(clock.getElapsedTime()) * 5.5;
+
   controls.update();
   renderer.render(scene, camera);
   window.requestAnimationFrame(stick);
