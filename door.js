@@ -16,6 +16,7 @@ mesh.position.y = 0.54;
 mesh.position.z = 2 + 0.01;
 
 mesh.scale.x = 1.5;
+mesh.scale.y = 1.2;
 
 mesh.geometry.setAttribute(
   'uv2',
