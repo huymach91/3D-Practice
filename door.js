@@ -1,8 +1,12 @@
 import * as THREE from 'three';
-import { doorTexture } from './texture';
-import { doorAmbientOcclusionTexture } from './texture';
-import { doorAlphaTexture } from './texture';
-import { doorNormalTexture } from './texture';
+import {
+  doorTexture,
+  doorAlphaTexture,
+  doorNormalTexture,
+  doorAmbientOcclusionTexture,
+  metalnessTexture,
+  roughnessTexture,
+} from './texture';
 
 const planeGeometry = new THREE.PlaneGeometry(1.5, 2.3, 1.5);
 const material = new THREE.MeshStandardMaterial({
@@ -12,6 +16,8 @@ const material = new THREE.MeshStandardMaterial({
   alphaMap: doorAlphaTexture,
   transparent: true,
   normalMap: doorNormalTexture,
+  metalnessMap: metalnessTexture,
+  roughnessMap: roughnessTexture,
 });
 const mesh = new THREE.Mesh(planeGeometry, material);
 mesh.position.y = 0.54;
