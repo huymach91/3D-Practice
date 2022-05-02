@@ -13,6 +13,11 @@ const doorAlpha = textureLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/door/alpha.jpg'
 );
 
+const doorNormal = textureLoader.load(
+  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/door/normal.jpg'
+);
+
 export const doorTexture = door;
 export const doorAmbientOcclusionTexture = doorAmbientOcclusion;
 export const doorAlphaTexture = doorAlpha;
+export const doorNormalTexture = doorNormal;
