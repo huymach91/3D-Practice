@@ -12,8 +12,10 @@ const material = new THREE.MeshStandardMaterial({
   transparent: true,
 });
 const mesh = new THREE.Mesh(planeGeometry, material);
-mesh.position.y = 0.6;
+mesh.position.y = 0.54;
 mesh.position.z = 2 + 0.01;
+
+mesh.scale.x = 1.5;
 
 mesh.geometry.setAttribute(
   'uv2',
