@@ -16,23 +16,23 @@ const canvas = document.getElementById('canvas');
 
 // material
 const basicMaterial = new THREE.MeshBasicMaterial({
-  color: 0xffff00,
-  side: THREE.DoubleSide,
+  color: 0xffffff,
 });
 
 // object
-const planeGeometry = new THREE.PlaneGeometry(1, 1);
+const planeGeometry = new THREE.PlaneGeometry(5, 5);
 const plane = new THREE.Mesh(planeGeometry, basicMaterial);
 plane.position.set(0, 0, 0);
-plane.rotation.x = -Math.PI;
-plane.rotation.y = Math.PI;
+
+plane.rotation.x = -Math.PI * 0.5;
+plane.position.y = -0.5;
 
 // ambient light
 const ambientLight = new THREE.AmbientLight();
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, size.width / size.height);
-camera.position.z = 5;
+camera.position.z = 8;
 camera.lookAt(plane.position);
 
 // controls
@@ -42,7 +42,7 @@ const orbitControl = new OrbitControls(camera, canvas);
 const axisHelper = new THREE.AxesHelper();
 
 // add to scene
-scene.add(plane, camera, ambientLight, axisHelper);
+scene.add(plane, camera, ambientLight);
 
 // renderer
 const renderer = new THREE.WebGLRenderer({
