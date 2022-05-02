@@ -9,6 +9,7 @@ import { roof } from './roof';
 import { door } from './door';
 import { bush1, bush2, bush3, bush4 } from './bush';
 import { ambientLight } from './ambientLight';
+import { doorLight } from './pointLight';
 
 const size = {
   width: 1200,
@@ -56,6 +57,7 @@ scene.add(
   roof,
   camera,
   ambientLight,
+  doorLight,
   axisHelper
 );
 
