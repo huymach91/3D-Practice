@@ -42,7 +42,7 @@ const orbitControl = new OrbitControls(camera, canvas);
 const axisHelper = new THREE.AxesHelper();
 
 // add to scene
-scene.add(plane, camera, ambientLight);
+scene.add(plane, camera, ambientLight, axisHelper);
 
 // renderer
 const renderer = new THREE.WebGLRenderer({
