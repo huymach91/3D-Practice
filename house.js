@@ -2,9 +2,13 @@ import * as THREE from 'three';
 
 // material
 const material = new THREE.MeshBasicMaterial({
-  color: 0xffffff,
+  color: '#ac8e82',
 });
 
-const boxGeometry = new THREE.BoxGeometry();
+const boxGeometry = new THREE.BoxGeometry(4, 2.5, 4);
 
-export const wall = new THREE.Mesh(boxGeometry, material);
+const mesh = new THREE.Mesh(boxGeometry, material);
+mesh.position.y = 0.5;
+
+
+export const wall = mesh;

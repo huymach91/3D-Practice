@@ -4,7 +4,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui';
-import { wall } from 'house';
+import { wall } from './house';
 
 const size = {
   width: 1200,
@@ -21,7 +21,7 @@ const basicMaterial = new THREE.MeshBasicMaterial({
 });
 
 // object
-const planeGeometry = new THREE.PlaneGeometry(5, 5);
+const planeGeometry = new THREE.PlaneGeometry(15, 15);
 const plane = new THREE.Mesh(planeGeometry, basicMaterial);
 plane.position.set(0, 0, 0);
 
