@@ -4,8 +4,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui';
-import { wall } from './house';
+import { wall } from './wall';
 import { roof } from './roof';
+import { doorTexture } from './texture';
 
 const size = {
   width: 1200,
