@@ -6,7 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui';
 import { wall } from './wall';
 import { roof } from './roof';
-import { doorTexture } from './texture';
+import { door } from './door';
 
 const size = {
   width: 1200,
@@ -45,7 +45,7 @@ const orbitControl = new OrbitControls(camera, canvas);
 const axisHelper = new THREE.AxesHelper();
 
 // add to scene
-scene.add(plane, wall, roof, camera, ambientLight, axisHelper);
+scene.add(plane, wall, door, roof, camera, ambientLight, axisHelper);
 
 // renderer
 const renderer = new THREE.WebGLRenderer({
