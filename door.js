@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { doorTexture } from './texture';
 
 const planeGeometry = new THREE.PlaneGeometry(1.5, 2.3, 1.5);
-const material = new THREE.MeshBasicMaterial({
+const material = new THREE.MeshStandardMaterial({
   map: doorTexture,
   color: 'aa7b7b',
 });

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 // material
-const material = new THREE.MeshBasicMaterial({
+const material = new THREE.MeshStandardMaterial({
   color: '#b35f45',
 });
 

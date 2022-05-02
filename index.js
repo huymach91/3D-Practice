@@ -8,6 +8,7 @@ import { wall } from './wall';
 import { roof } from './roof';
 import { door } from './door';
 import { bush1, bush2, bush3, bush4 } from './bush';
+import { ambientLight } from './ambientLight';
 
 const size = {
   width: 1200,
@@ -19,7 +20,7 @@ const scene = new THREE.Scene();
 const canvas = document.getElementById('canvas');
 
 // material
-const basicMaterial = new THREE.MeshBasicMaterial({
+const basicMaterial = new THREE.MeshStandardMaterial({
   color: 0xffffff,
 });
 
@@ -30,9 +31,6 @@ plane.position.set(0, 0, 0);
 
 plane.rotation.x = -Math.PI * 0.5;
 plane.position.y = -0.5;
-
-// ambient light
-const ambientLight = new THREE.AmbientLight();
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, size.width / size.height);

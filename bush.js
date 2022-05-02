@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 const sphereGeometry = new THREE.SphereGeometry();
-const material = new THREE.MeshBasicMaterial({
+const material = new THREE.MeshStandardMaterial({
   color: '#89c854',
 });
 const bush1 = new THREE.Mesh(sphereGeometry, material);
