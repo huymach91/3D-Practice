@@ -35,7 +35,8 @@ const ambientLight = new THREE.AmbientLight();
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, size.width / size.height);
-camera.position.z = 15;
+camera.position.z = 6;
+camera.position.y = 1.5;
 camera.lookAt(plane.position);
 
 // controls
