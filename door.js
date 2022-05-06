@@ -6,15 +6,18 @@ import {
   doorAmbientOcclusionTexture,
   metalnessTexture,
   roughnessTexture,
+  doorHeightTexture,
 } from './texture';
 
-const planeGeometry = new THREE.PlaneGeometry(1.5, 2.3, 1.5);
+const planeGeometry = new THREE.PlaneGeometry(2.2, 2.2, 100, 100);
 const material = new THREE.MeshStandardMaterial({
   map: doorTexture,
   color: 'aa7b7b',
   aoMap: doorAmbientOcclusionTexture,
   alphaMap: doorAlphaTexture,
   transparent: true,
+  displacementScale: 0.1,
+  displacementMap: doorHeightTexture,
   normalMap: doorNormalTexture,
   metalnessMap: metalnessTexture,
   roughnessMap: roughnessTexture,

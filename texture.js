@@ -25,9 +25,14 @@ const roughness = textureLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/door/roughness.jpg'
 );
 
+const doorHeight = textureLoader.load(
+  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/door/height.jpg'
+);
+
 export const doorTexture = door;
 export const doorAmbientOcclusionTexture = doorAmbientOcclusion;
 export const doorAlphaTexture = doorAlpha;
 export const doorNormalTexture = doorNormal;
 export const metalnessTexture = metalness;
 export const roughnessTexture = roughness;
+export const doorHeightTexture = doorHeight;
