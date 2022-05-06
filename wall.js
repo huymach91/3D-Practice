@@ -1,15 +1,25 @@
 import * as THREE from 'three';
-import { wallColorTexture } from './texture';
+import {
+  wallColorTexture,
+  wallAmbientOcclusion,
+  wallNormalMapTexture,
+} from './texture';
 
 // material
-const material = new THREE.MeshBasicMaterial({
+const material = new THREE.MeshStandardMaterial({
   color: '#ac8e82',
-  m: wallColorTexture,
+  map: wallColorTexture,
+  aoMap: wallAmbientOcclusion,
+  normalMap: wallNormalMapTexture,
 });
 
 const boxGeometry = new THREE.BoxGeometry(4, 2.5, 4);
 
 const mesh = new THREE.Mesh(boxGeometry, material);
+mesh.geometry.setAttribute(
+  'uv2',
+  new THREE.Float32BufferAttribute(mesh.geometry.attributes.uv.array, 2)
+);
 mesh.position.y = 0.5;
 
 export const wall = mesh;
