@@ -40,4 +40,4 @@ export const doorNormalTexture = doorNormal;
 export const metalnessTexture = metalness;
 export const roughnessTexture = roughness;
 export const doorHeightTexture = doorHeight;
-export const wallColorTexture = wallColor
+export const wallColorTexture = wallColor;
