@@ -41,6 +41,10 @@ const wallNormalMap = textureLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/bricks/normal.jpg'
 );
 
+const wallRoughness = textureLoader.load(
+  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/bricks/roughness.jpg'
+);
+
 export const doorTexture = door;
 export const doorAmbientOcclusionTexture = doorAmbientOcclusion;
 export const doorAlphaTexture = doorAlpha;
@@ -51,3 +55,4 @@ export const doorHeightTexture = doorHeight;
 export const wallColorTexture = wallColor;
 export const wallAmbientOcclusionTexture = wallAmbientOcclusion;
 export const wallNormalMapTexture = wallNormalMap;
+export const wallRoughnessTexture = wallRoughness;

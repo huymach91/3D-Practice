@@ -3,6 +3,7 @@ import {
   wallColorTexture,
   wallAmbientOcclusion,
   wallNormalMapTexture,
+  wallRoughnessTexture,
 } from './texture';
 
 // material
@@ -11,6 +12,7 @@ const material = new THREE.MeshStandardMaterial({
   map: wallColorTexture,
   aoMap: wallAmbientOcclusion,
   normalMap: wallNormalMapTexture,
+  roughnessMap: wallRoughnessTexture,
 });
 
 const boxGeometry = new THREE.BoxGeometry(4, 2.5, 4);
