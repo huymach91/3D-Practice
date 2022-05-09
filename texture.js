@@ -49,6 +49,10 @@ const grassColor = textureLoader.load(
   'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/grass/color.jpg'
 );
 
+const grassNormal = textureLoader.load(
+  'https://raw.githubusercontent.com/huymach91/3D-Practice/master/images/grass/normal.jpg'
+);
+
 export const doorTexture = door;
 export const doorAmbientOcclusionTexture = doorAmbientOcclusion;
 export const doorAlphaTexture = doorAlpha;
@@ -61,3 +65,4 @@ export const wallAmbientOcclusionTexture = wallAmbientOcclusion;
 export const wallNormalMapTexture = wallNormalMap;
 export const wallRoughnessTexture = wallRoughness;
 export const grassColorTexture = grassColor;
+export const grassNormalTexture = grassNormal;
