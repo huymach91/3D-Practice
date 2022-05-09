@@ -3,10 +3,11 @@
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import * as dat from 'lil-gui';
+// import * as dat from 'lil-gui';
 import { wall } from './wall';
 import { roof } from './roof';
 import { door } from './door';
+import { floor } from './floor';
 import { bush1, bush2, bush3, bush4 } from './bush';
 import { ambientLight } from './ambientLight';
 import { doorLight } from './pointLight';
@@ -21,24 +22,11 @@ const size = {
 const scene = new THREE.Scene();
 const canvas = document.getElementById('canvas');
 
-// material
-const basicMaterial = new THREE.MeshStandardMaterial({
-  color: 0xffffff,
-});
-
-// object
-const planeGeometry = new THREE.PlaneGeometry(15, 15);
-const plane = new THREE.Mesh(planeGeometry, basicMaterial);
-plane.position.set(0, 0, 0);
-
-plane.rotation.x = -Math.PI * 0.5;
-plane.position.y = -0.5;
-
 // camera
 const camera = new THREE.PerspectiveCamera(75, size.width / size.height);
 camera.position.z = 6;
 camera.position.y = 1.5;
-camera.lookAt(plane.position);
+camera.lookAt(floor.position);
 
 // controls
 const orbitControl = new OrbitControls(camera, canvas);
@@ -48,7 +36,7 @@ const axisHelper = new THREE.AxesHelper();
 
 // add to scene
 scene.add(
-  plane,
+  floor,
   wall,
   door,
   bush1,
