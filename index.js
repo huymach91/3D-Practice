@@ -22,6 +22,9 @@ const size = {
 const scene = new THREE.Scene();
 const canvas = document.getElementById('canvas');
 
+// fog
+const fog = new THREE.Fog('#262837', 1, 15);
+
 // camera
 const camera = new THREE.PerspectiveCamera(75, size.width / size.height);
 camera.position.z = 6;
@@ -35,6 +38,7 @@ const orbitControl = new OrbitControls(camera, canvas);
 const axisHelper = new THREE.AxesHelper();
 
 // add to scene
+
 scene.add(
   floor,
   wall,
