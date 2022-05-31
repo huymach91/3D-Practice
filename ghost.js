@@ -7,7 +7,7 @@ ghost.position.set(1, 1, 6);
 gsap.to(ghost.position, {
   duration: 1,
   delay: 1,
-  y: 5,
+  y: Math.sin(7) * 5,
   yoyo: true,
   repeat: -1,
 });
