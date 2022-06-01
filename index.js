@@ -76,12 +76,12 @@ const clock = new THREE.Clock();
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
-  ghost.position.y = Math.sin(elapsedTime) * 4;
-  ghost.position.x = Math.cos(elapsedTime) * 4;
+  ghost.position.x = Math.sin(elapsedTime) * 7;
+  ghost.position.z = Math.cos(elapsedTime) * 7;
 
-  const ghost1Angle = elapsedTime;
-  sphere.position.x = Math.sin(ghost1Angle) * 4;
-  sphere.position.z = Math.cos(ghost1Angle) * 4;
+  sphere.position.x = Math.sin(elapsedTime) * 4;
+  sphere.position.z = Math.cos(elapsedTime) * 4;
+  sphere.position.y = Math.sin(elapsedTime * 3) + ;
   // gsap.to(sphere.position, { duration: 1, delay: 1, x: 2, y: 2 });
 
   orbitControl.update();
