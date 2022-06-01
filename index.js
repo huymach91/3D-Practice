@@ -79,6 +79,7 @@ const tick = () => {
   ghost.position.y = Math.sin(elapsedTime) * 4;
   ghost.position.x = Math.cos(elapsedTime) * 4;
 
+  // sphere.rotation.y = elapsedTime;
   // gsap.to(sphere.position, { duration: 1, delay: 1, x: 2, y: 2 });
 
   orbitControl.update();
