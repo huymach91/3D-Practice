@@ -77,8 +77,8 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
   const ghost1Angle = elapsedTime * 0.5;
-  ghost.position.x = Math.sin(ghost1Angle) * 4;
-  ghost.position.z = Math.cos(ghost1Angle) * ;
+  ghost.position.x = Math.sin(ghost1Angle) * 6;
+  ghost.position.z = Math.cos(ghost1Angle) * 6;
 
   // sphere.position.x = Math.sin(elapsedTime) * 4;
   // sphere.position.z = Math.cos(elapsedTime) * 4;
