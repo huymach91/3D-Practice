@@ -13,6 +13,8 @@ import { ambientLight } from './ambientLight';
 import { doorLight } from './pointLight';
 import { graveList } from './grave';
 import ghost from './ghost';
+import sphere from './sphere';
+import gsap from 'gsap';
 
 const size = {
   width: 1200,
@@ -48,6 +50,7 @@ scene.add(
   bush2,
   bush3,
   bush4,
+  sphere,
   roof,
   camera,
   ambientLight,
@@ -68,8 +71,16 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(size.width, size.height);
 renderer.render(scene, camera);
 
+const clock = new THREE.Clock();
 // animate
 const tick = () => {
+  const elapsedTime = clock.getElapsedTime();
+
+  ghost.position.y = Math.sin(elapsedTime) * 4;
+  ghost.position.x = Math.cos(elapsedTime) * 4;
+
+  // gsap.to(sphere.position, { duration: 1, delay: 1, x: 2, y: 2 });
+
   orbitControl.update();
   window.requestAnimationFrame(tick);
   renderer.render(scene, camera);
